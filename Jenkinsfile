@@ -1,4 +1,5 @@
 pipeline {
+  agent any 
   stages {
     stage('Build') {
       steps {
@@ -10,9 +11,11 @@ pipeline {
         sh 'npm run test'
       }
     }
-    stage('Deploy') {
+    stage('Deliver') { 
       steps {
-        sh 'npm run deploy'
+        sh './jenkins/scripts/deliver.sh' 
+        input message: 'Finished using the web site? (Click "Proceed" to continue)' 
+        sh './jenkins/scripts/kill.sh' 
       }
     }
   }
