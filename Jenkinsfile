@@ -4,7 +4,7 @@ pipeline {
         //once you sign up for Docker hub, use that user_id here
         registry = "evandroafonso/frontdevops"
         //- update your credentials ID after creating credentials for connecting to Docker Hub
-        registryCredential = 'fa32f95a-2d3e-4c7b-8f34-11bcc0191d70'
+        registryCredential = ''
         dockerImage = ''
     }
   stages {
@@ -23,15 +23,12 @@ pipeline {
         sh 'npm run test'
       }
     }
-    stage('Dockerize') {
-        steps {
-          script {
-            docker.build("front-devops:${env.BUILD_NUMBER}")
-            docker.withRegistry('https://hub.docker.com/r/evandroafonso/frontdevops', 'docker-registry-credentials-id') {
-              dockerImage.push()
-            }
-          }
+    stage('Build Docker Image'){
+      steps{
+        scrip{
+          dockerImage = docker.build registry
         }
+      }
     }
   }
 }
