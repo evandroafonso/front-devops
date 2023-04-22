@@ -1,14 +1,18 @@
-name: Whatsapp Notification
-
-on: [push, pull_request, issues, fork, watch]
-
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@main
       - name: whatsapp-notify
-        uses: evandroafonso/front-devops@main
+        id: whatsapp-notify
         env:
-          ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
-          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
-          TO_WHATSAPP_NUMBER: ${{ secrets.TO_WHATSAPP_NO }}
+          account_sid: ${{ secrets.ACCOUNT_SID }}
+          auth_token: ${{ secrets.AUTH_TOKEN }}
+          to_whatsapp_no: ${{ secrets.TO_WHATSAPP_NO }}
+
+        uses: atifazeez77/whatsapp-push-notify-action@master
+
+      - name: Run
+        run: |
+          echo 'Start!'
