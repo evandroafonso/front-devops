@@ -56,12 +56,11 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.REACTUSERNAME }}/shopping-app-react:latest
+          tags: ${{ secrets.REACTUSERNAME }}/frontdevops:latest
 
       - name: Run the image in a container
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ secrets.REACTUSERNAME }}/shopping-app-react:latest
+          image: ${{ secrets.REACTUSERNAME }}/frontdevops:latest
           run: |
             echo "runing the docker image"
-
