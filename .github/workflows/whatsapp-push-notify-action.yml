@@ -1,4 +1,4 @@
-name: Notifier
+name: Notifier WhatsApp
 
 on:
   push:
